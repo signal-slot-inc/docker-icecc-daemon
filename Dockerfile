@@ -1,9 +1,9 @@
-FROM alpine:3.4
+FROM alpine:3.14
 
-RUN apk --no-cache add libcap-ng lzo libstdc++ && \
-    apk --no-cache add --virtual .bdeps alpine-sdk git automake autoconf libtool libcap-ng-dev lzo-dev && \
+RUN apk --no-cache add libcap-ng lzo libstdc++ zstd libarchive && \
+    apk --no-cache add --virtual .bdeps alpine-sdk git automake autoconf libtool libcap-ng-dev lzo-dev zstd-dev libarchive-dev && \
     git clone https://github.com/icecc/icecream && \
-    (cd icecream && autoreconf -i && ./configure --without-man && make && make install) && \
+    (cd icecream && autoreconf -i && ./configure --without-man && make -j`nproc` && make install) && \
     rm -rf icecream && \
     apk del .bdeps
 

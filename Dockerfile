@@ -7,10 +7,12 @@ RUN apk --no-cache add libcap-ng lzo libstdc++ zstd libarchive gcc g++ bash file
     rm -rf icecream && \
     apk del .bdeps
 
-# Run icecc daemon in verbose mode
-ENTRYPOINT ["iceccd","-v"]
-# If no-args passed, make very verbose
-CMD ["-vv"]
+# Run icecc daemon in verbose mode by default
+CMD ["iceccd","-vv"]
 
 # iceccd port
 EXPOSE 10245
+
+# icecc-scheduler port
+EXPOSE 8765/TCP 8765/UDP
+

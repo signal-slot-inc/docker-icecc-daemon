@@ -13,4 +13,4 @@ ENTRYPOINT ["iceccd","-v"]
 CMD ["-vv"]
 
 # iceccd port
-EXPOSE 10245 8765/TCP 8765/UDP 8766
+EXPOSE 10245
